@@ -50,7 +50,6 @@ def main():
         vectorizer = CountVectorizer(max_features=args.max_features, stop_words=args.stop_word)
 
     a = []
-    print(corpus[0])
     word_Lemmatized = pymorphy2.MorphAnalyzer()
     for i in corpus:
         i = word_tokenize(i)
@@ -59,13 +58,11 @@ def main():
             word_f = word_Lemmatized.parse(word)[0].normal_form
             sen.append(word_f)
         a.append(concat_s(sen))
-
     corpus = a
-    print(corpus[0])
+    
     X_train = vectorizer.fit_transform(corpus).toarray()
 
     c = vectorizer.get_feature_names()
-    print(len(c))
     X_test = vectorizer.transform(X_test).toarray()
 
     if args.vectorization == 'bool':
